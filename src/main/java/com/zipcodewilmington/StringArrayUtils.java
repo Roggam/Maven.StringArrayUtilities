@@ -10,6 +10,7 @@ import java.util.Arrays;
  */
 public class StringArrayUtils {
 
+
     /**
      * @param array array of String objects
      * @return first element of specified array
@@ -199,10 +200,25 @@ public class StringArrayUtils {
      * @param array array of chars
      * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
      */ // TODO
-    public static String[] packConsecutiveDuplicates(String[] array) { // Still working on this one
-// work in progress
+    public static String[] packConsecutiveDuplicates(String[] array) { // Finally figured it out Thanks to Mike
 
-        return null;
+        String stringOfArr = "";
+        stringOfArr = (array[0]); // holds value at index 0
+        for (int i = 1; i < array.length; i++) {
+            String currentIndex  = array[i - 1]; // would start at index 0
+            String  nextIndex = array[i];        // would start at index 1
+
+            if(currentIndex == nextIndex){ // compares if current Index value is not equal to next Index value
+                stringOfArr += (array[i]); // if true it will add value at current index to stringArr
+            }
+            else {
+
+                stringOfArr +=( " " +array[i]); // Will add space before array at current index
+            }
+
+        }
+        String[] newArr = stringOfArr.split(" "); // created new Array by splitting by spaces
+        return newArr;
     }
 
 
