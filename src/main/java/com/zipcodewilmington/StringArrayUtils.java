@@ -1,9 +1,15 @@
 package com.zipcodewilmington;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+
+
 /**
  * Created by leon on 1/29/18.
  */
 public class StringArrayUtils {
+
     /**
      * @param array array of String objects
      * @return first element of specified array
@@ -25,7 +31,7 @@ public class StringArrayUtils {
      * @return last element in specified array
      */ // TODO
     public static String getLastElement(String[] array) {
-        return null;
+        return array[array.length - 1];
     }
 
     /**
@@ -33,7 +39,7 @@ public class StringArrayUtils {
      * @return second to last element in specified array
      */ // TODO
     public static String getSecondToLastElement(String[] array) {
-        return null;
+        return array[array.length - 2];
     }
 
     /**
@@ -42,7 +48,19 @@ public class StringArrayUtils {
      * @return true if the array contains the specified `value`
      */ // TODO
     public static boolean contains(String[] array, String value) {
-        return false;
+        ArrayList<String> newArr = new ArrayList(Arrays.asList(array)); // converted array to ArrayList so i can use its "contains" method ... Thanks Leon
+        Boolean isValueInArray = null;
+
+
+        if (newArr.contains(value)) {
+            isValueInArray = true;
+
+        } else {
+
+            isValueInArray = false;
+        }
+
+        return isValueInArray;
     }
 
     /**
@@ -50,7 +68,17 @@ public class StringArrayUtils {
      * @return an array with identical contents in reverse order
      */ // TODO
     public static String[] reverse(String[] array) {
-        return null;
+
+        for (int i = 0; i < array.length / 2; i++) {
+            String temp = array[i]; // gets value at each index
+
+            array[i] = array[array.length - i - 1];
+
+            array[array.length - i - 1] = temp; // assigns temp value to current array index
+        }
+
+
+        return array;
     }
 
     /**
@@ -58,7 +86,21 @@ public class StringArrayUtils {
      * @return true if the order of the array is the same backwards and forwards
      */ // TODO
     public static boolean isPalindromic(String[] array) {
-        return false;
+        Boolean result = null;
+        for (int i = 0; i < array.length; i++) {
+
+            if (array[i] == array[array.length - i -1]){ // compares if  array[current iteration] is same as array[array length - current iteration -1]
+                                                            // first compares index 0 to index 4 then index 1 to index 3 and finally index 2 to index 2
+                                                            //example ["a","b","c","b","a"]  = true
+                                                            //indexes   0   1   2   3   4
+                result = true;
+            }
+            else {
+                result = false;
+            }
+
+        }
+        return result;
     }
 
     /**
@@ -66,7 +108,33 @@ public class StringArrayUtils {
      * @return true if each letter in the alphabet has been used in the array
      */ // TODO
     public static boolean isPangramic(String[] array) {
-        return false;
+
+        Boolean result = null;
+        StringBuilder newStrings = new StringBuilder();
+
+        for(String e : array){
+            newStrings.append(e);     // appended each element in array to newString
+        }
+
+        String newString = newStrings.toString().replaceAll(" ", "").toLowerCase(); // removed spaces and  converted to lower case
+
+         if(newString.length() < 26){  // if string length is less than 26 letter return false because there are only 26 letters in the alphabet
+
+             result = false;
+         }else {   // otherwise run this.  even though all tests passed im not sure this is the best solution. will improve it when I get better with Arrays
+
+             for (int i = 0; i < newString.length(); i++) {
+                 char letter = newString.charAt(i); // created a local char variable that holds value at current iteration
+
+                 if (letter >= 'a' && letter <= 'z') {
+
+                     result = true;
+                 }
+
+             }
+         }
+
+        return result;
     }
 
     /**
@@ -75,7 +143,16 @@ public class StringArrayUtils {
      * @return number of occurrences the specified `value` has occurred
      */ // TODO
     public static int getNumberOfOccurrences(String[] array, String value) {
-        return 0;
+
+        Integer counter = 0;
+        for (int i = 0; i < array.length; i++) {
+
+            if(array[i] == value){ // if array value at current iteration is equal to value  increment counter
+                counter ++;
+
+            }
+        }
+        return counter;
     }
 
     /**
@@ -84,7 +161,17 @@ public class StringArrayUtils {
      * @return array with identical contents excluding values of `value`
      */ // TODO
     public static String[] removeValue(String[] array, String valueToRemove) {
-        return null;
+
+        ArrayList<String> newArr = new ArrayList<>(Arrays.asList(array)); // created ArrayList to be able to use the contains() which returns true or false
+
+        for (int i = 0; i < array.length; i++) {
+
+            if(newArr.contains(valueToRemove)){ // evaluates if newArr contains "Value to Remove"
+
+                newArr.remove(valueToRemove); // will remove value in newArr if value is found
+            }
+        }
+        return newArr.toArray(new String[0]); // converts newArr to an Array
     }
 
     /**
@@ -92,14 +179,29 @@ public class StringArrayUtils {
      * @return array of Strings with consecutive duplicates removes
      */ // TODO
     public static String[] removeConsecutiveDuplicates(String[] array) {
-        return null;
+
+        String stringOfArr = "";
+        stringOfArr = (array[0] + " "); // holds value at index 0
+        for (int i = 1; i < array.length; i++) {
+            String currentIndex  = array[i - 1]; // would start at index 0
+            String  nextIndex = array[i];        // would start at index 1
+
+            if(currentIndex != nextIndex){ // compares if current Index value is not equal to next Index value
+                stringOfArr += (array[i] + " "); // if true it will add value at current index to stringArr
+            }
+        }
+       String[] newArr = stringOfArr.split(" "); // created new Array by splitting by spaces
+
+        return newArr;
     }
 
     /**
      * @param array array of chars
      * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
      */ // TODO
-    public static String[] packConsecutiveDuplicates(String[] array) {
+    public static String[] packConsecutiveDuplicates(String[] array) { // Still working on this one
+// work in progress
+
         return null;
     }
 
